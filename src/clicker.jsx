@@ -1,7 +1,7 @@
 import React from 'react';
 import './clicker.css'
 
-class Clicker extends React.Component{
+export default class Clicker extends React.Component{
   constructor(props){
     super(props);
 
@@ -11,6 +11,7 @@ class Clicker extends React.Component{
 
     this.handleIncrement = this.handleIncrement.bind(this);
     this.handleDecrement = this.handleDecrement.bind(this);
+    this.handleClick = this.handleClick.bind(this);
         
   }
   
@@ -23,20 +24,29 @@ class Clicker extends React.Component{
     this.setState((prev) => ({ count: prev.count - 1 }));
   }
 
+  handleClick() {
+    this.setState(prevState => ({
+      isToggleOn: !prevState.isToggleOn
+    }));
+  }
+
 
   render(){
     return (
       <div className="container ">
         <div className="">{this.state.count}</div>
-              <div className="">
+                <div>
                 <button className="btn green " onClick={this.handleIncrement}>
                 Больше
+                </button>
+                <button onClick={this.handleClick} className='btn black'>
+                  {this.state.isToggleOn ? '+2' : '+1'}
                 </button>
                 <button className="btn red" onClick={this.handleDecrement}>
                   Меньше
                 </button>
+                </div>
               </div>
-          </div>
     );
   }
 }
@@ -44,6 +54,3 @@ class Clicker extends React.Component{
 Clicker.defaultProps={
   count:0
 }
-
-
-export default Clicker;
